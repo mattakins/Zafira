@@ -1,26 +1,114 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Zafira Inter";
+  src: url("/zafira-assets/45-inter_n4.b2a3f24c19b4de56e8871f609e73ca7f6d2e2bb9.woff2") format("woff2");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Zafira Inter";
+  src: url("/zafira-assets/46-inter_n5.d7101d5e168594dd06f56f290dd759fba5431d97.woff2") format("woff2");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Zafira Inter";
+  src: url("/zafira-assets/47-inter_n7.02711e6b374660cfc7915d1afc1c204e633421e4.woff2") format("woff2");
+  font-weight: 700;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f3fcf3;
+  --foreground: #102714;
+  --cream: #fff7f5;
+  --mint: #d3f1d3;
+  --green: #035c05;
+  --green-2: #49934b;
+  --line: rgba(3, 92, 5, 0.15);
+  --soft: rgba(3, 92, 5, 0.05);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: "Zafira Inter", Arial, Helvetica, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Zafira Inter", Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
+button,
+a {
+  font-family: inherit;
+}
+
+.font-display {
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.cta-button {
+  align-items: center;
+  background: var(--green);
+  border-radius: 999px;
+  color: white;
+  display: inline-flex;
+  font-size: 14px;
+  font-weight: 800;
+  justify-content: center;
+  min-height: 54px;
+  padding: 0 30px;
+  text-decoration: none;
+  transition: transform 180ms ease, background 180ms ease;
+}
+
+.cta-button:hover {
+  background: #024604;
+  transform: translateY(-1px);
+}
+
+.section-shell {
+  margin: 0 auto;
+  max-width: 1180px;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.green-card {
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: 0 18px 60px rgba(3, 92, 5, 0.08);
+}
+
+.marquee {
+  animation: marquee 28s linear infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 720px) {
+  .section-shell {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
 }
