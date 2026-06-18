@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Zafira Recovery Foundation - Clean Evaluation Export</title>
+    <style>
+      :root {
+        --green: #035c05;
+        --green-dark: #004707;
+        --mint: #d9f5d8;
+        --cream: #fffaf2;
+        --text: #123312;
+        --muted: #476247;
+        --border: #cfe4cc;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        color: var(--text);
+        background: #ffffff;
+        font-family: Inter, Arial, sans-serif;
+        line-height: 1.55;
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+      }
+
+      .page {
+        max-width: 1040px;
+        margin: 0 auto;
+      }
+
+      header,
+      section,
+      footer {
+        padding: 40px 24px;
+      }
+
+      .topbar {
+        padding: 18px 24px;
+        text-align: center;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .brand {
+        margin: 0;
+        color: var(--green);
+        font-family: Georgia, serif;
+        font-size: 40px;
+        line-height: 1;
+      }
+
+      .hero {
+        background: var(--mint);
+        text-align: center;
+      }
+
+      .rating {
+        margin: 0 0 12px;
+        color: var(--green);
+        font-weight: 700;
+      }
+
+      h1,
+      h2,
+      h3 {
+        color: var(--green);
+        font-family: Georgia, serif;
+        line-height: 1.08;
+      }
+
+      h1 {
+        max-width: 820px;
+        margin: 0 auto 18px;
+        font-size: clamp(34px, 6vw, 64px);
+      }
+
+      h2 {
+        margin: 0 0 20px;
+        font-size: clamp(28px, 4vw, 44px);
+      }
+
+      h3 {
+        margin: 28px 0 10px;
+        font-size: 24px;
+      }
+
+      .symptoms {
+        max-width: 760px;
+        margin: 0 auto 16px;
+        color: var(--green);
+        font-size: 22px;
+        font-style: italic;
+        font-weight: 800;
+        line-height: 1.25;
+      }
+
+      .subhead {
+        max-width: 760px;
+        margin: 0 auto 28px;
+        color: var(--green);
+        font-size: 22px;
+        line-height: 1.25;
+      }
+
+      .button {
+        display: inline-block;
+        margin: 0 0 28px;
+        padding: 15px 42px;
+        color: #ffffff;
+        background: var(--green);
+        border-radius: 999px;
+        font-weight: 900;
+        letter-spacing: 1px;
+        text-decoration: none;
+      }
+
+      .hero-image {
+        max-width: 760px;
+        margin: 0 auto;
+      }
+
+      .press {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+        margin: 0;
+        padding: 24px;
+        color: #ffffff;
+        background: var(--green);
+        list-style: none;
+        text-align: center;
+        font-family: Georgia, serif;
+        font-size: 22px;
+        font-weight: 700;
+      }
+
+      .science,
+      .faq,
+      .reviews {
+        background: var(--cream);
+      }
+
+      .section-card {
+        margin: 24px 0;
+        padding: 28px;
+        background: #ffffff;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+      }
+
+      .two-col {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+        align-items: center;
+      }
+
+      .callout {
+        padding: 24px;
+        background: var(--mint);
+        border-left: 5px solid var(--green);
+      }
+
+      ul {
+        padding-left: 22px;
+      }
+
+      li + li {
+        margin-top: 8px;
+      }
+
+      .product {
+        background: #ffffff;
+      }
+
+      .product-box {
+        padding: 28px;
+        border: 2px solid var(--green);
+        border-radius: 8px;
+      }
+
+      .review-grid,
+      .ingredient-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      blockquote {
+        margin: 0;
+        padding: 20px;
+        background: #ffffff;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+      }
+
+      blockquote p {
+        margin-top: 0;
+      }
+
+      cite {
+        color: var(--green);
+        font-style: normal;
+        font-weight: 800;
+      }
+
+      .disclaimer {
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      footer {
+        color: #ffffff;
+        background: var(--green-dark);
+      }
+
+      footer a {
+        color: #ffffff;
+      }
+
+      @media (max-width: 760px) {
+        header,
+        section,
+        footer {
+          padding: 30px 18px;
+        }
+
+        .two-col,
+        .review-grid,
+        .ingredient-grid,
+        .press {
+          grid-template-columns: 1fr;
+        }
+
+        .subhead {
+          font-size: 19px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="topbar">
+        <p class="brand">Zafira</p>
+      </div>
+
+      <header class="hero">
+        <p class="rating">4.9/5 - 12,847+ Reviews</p>
+        <h1><strong>GLP-1 Flu?</strong> Here's What Your Doctor Won&rsquo;t Tell You...</h1>
+        <p class="symptoms">Nausea. Exhaustion. Brain fog. Flat mood. No motivation. Muscle loss.</p>
+        <p class="subhead">This simple organic formula helps alleviate the mental and physical side effects of GLP-1 so you feel like yourself again &mdash; even while losing weight fast.</p>
+        <a class="button" href="#product">Shop Now</a>
+        <img class="hero-image" src="assets/glp-1-flu.png" alt="Woman experiencing GLP-1 side effects at a kitchen table">
+      </header>
+
+      <ul class="press" aria-label="Press logos">
+        <li>The Journal of Nutrition</li>
+        <li>Allure</li>
+        <li>Harper's Bazaar</li>
+        <li>Women's Health</li>
+      </ul>
+
+      <section class="science" id="science">
+        <div class="section-card">
+          <h2>The Numbers Behind the Problem</h2>
+          <p>As of late 2025, approximately <strong>15.5 million Americans</strong> are currently prescribed GLP-1 receptor agonist medications &mdash; semaglutide (Ozempic, Wegovy), tirzepatide (Mounjaro, Zepbound), and related compounds.</p>
+          <p>Industry projections estimate this number will exceed 30 million by 2030 as access expands and new formulations enter the market.</p>
+          <p>These medications represent one of the most significant pharmaceutical developments in metabolic health in decades. They work. The clinical data is undeniable.</p>
+          <p>But the side effect data is equally undeniable.</p>
+          <ul>
+            <li>Up to <strong>44%</strong> of GLP-1 users report persistent nausea beyond the initial adjustment period.</li>
+            <li>Up to <strong>24%</strong> report significant constipation requiring intervention.</li>
+            <li>Up to <strong>39%</strong> report fatigue that doesn&rsquo;t resolve with rest.</li>
+            <li>Emerging psychiatric data suggests a substantially elevated risk of depression and anhedonia in long-term users.</li>
+          </ul>
+          <p>Yet when we surveyed over 2,400 GLP-1 users across the United States, we found something more concerning than the side effects themselves: <strong>73%</strong> reported that their prescribing physician offered no specific solutions for their side effects beyond "wait it out" or "reduce your dose."</p>
+          <p>This was the gap we set out to close.</p>
+        </div>
+
+        <div class="section-card two-col">
+          <div>
+            <h2>Identifying the 6 Core Side Effects</h2>
+            <p>We spent the first four months of our research phase doing something most supplement companies skip entirely: listening.</p>
+            <p>We conducted structured interviews with <strong>847 GLP-1 users</strong>, partnered with three weight loss clinics, and analyzed over 12,000 forum posts for recurring language patterns.</p>
+            <p>What emerged was remarkably consistent. Six distinct side effect categories appeared repeatedly.</p>
+          </div>
+          <img src="assets/science-image-2.png" alt="Science section visual">
+        </div>
+
+        <div class="section-card">
+          <h3>The 6 categories</h3>
+          <ul>
+            <li><strong>Nausea</strong> - persistent, often daily, frequently worse in mornings.</li>
+            <li><strong>Reflux &amp; sulfur burps</strong> - described as "the worst part" by many users.</li>
+            <li><strong>Constipation</strong> - unresponsive to standard fiber interventions.</li>
+            <li><strong>Hair loss</strong> - typically appearing 3-4 months into treatment.</li>
+            <li><strong>Fatigue</strong> - described as "bone-deep exhaustion" despite adequate sleep.</li>
+            <li><strong>Depression, anhedonia &amp; emotional flatness</strong> - the inability to feel pleasure or motivation.</li>
+          </ul>
+          <p>When we asked users which side effects concerned them most, the mental health effects ranked highest &mdash; yet were the least discussed by healthcare providers.</p>
+        </div>
+
+        <div class="section-card two-col">
+          <img src="assets/science-image-3.png" alt="Supplement research visual">
+          <div>
+            <h2>Why No Solution Existed</h2>
+            <p>This was the question that shaped our entire approach: if these side effects are so common and so well-documented, why hasn&rsquo;t anyone created a proper solution?</p>
+            <p>The answer, we discovered, came down to mechanism.</p>
+            <p>Most supplement companies approach side effects symptomatically. Nausea? Here&rsquo;s ginger. Fatigue? Here&rsquo;s B12. Depression? Here&rsquo;s St. John&rsquo;s Wort.</p>
+            <p>But GLP-1 side effects don&rsquo;t work that way.</p>
+            <p>These medications create a cascade of interconnected disruptions across multiple biological systems &mdash; digestive motility, nutrient retention, and neurotransmitter pathway function.</p>
+            <p>Addressing one while ignoring the others produces incomplete results. No one had designed a protocol that addressed all six mechanisms simultaneously, using therapeutic doses based on the specific disruptions GLP-1 medications cause. Until now.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="two-col">
+          <img src="https://assets.replocdn.com/projects/836aaaaf-1cf3-4eb5-aacb-a7f45252e2f2/34ec7242-ca56-4713-8d17-a949918d9bac" alt="Recovery Foundation bottle illustration">
+          <div>
+            <h2>Why Recovery Foundation?</h2>
+            <p>Recent research shows GLP-1 medications can suppress dopamine pathways beyond just appetite control, messing up the whole reward system in your brain.</p>
+            <p>While these medications are effective for weight loss, the science proves that it is extremely difficult for some to undergo the mental and physical health challenges while on GLP-1. Recovery Foundation supports your physical and mental health with targeted nutrition.</p>
+            <h3>What Makes It Work</h3>
+            <ul>
+              <li>Saffron extract supports dopamine receptor function.</li>
+              <li>Therapeutic myo-inositol dose addresses digestive slowing.</li>
+              <li>Essential minerals replace accelerated depletion.</li>
+              <li>Ginger reduces common GI symptoms.</li>
+            </ul>
+            <div class="callout">
+              <strong>The bottom line:</strong> You don&rsquo;t have to sacrifice your mental health for physical results. Recovery Foundation protects both.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>The Triple Depletion Complex&trade;</h2>
+        <p>We discovered what others missed. Recent studies revealed GLP-1 drugs cause your brain to overproduce dopamine transporters - therefore entirely removing the "happiness" element from your brain. This isn&rsquo;t a side effect that improves with time - the risk increases from 9.36% at 6 months to <strong>39.64% at 5 years.</strong></p>
+        <h3>Our Three-Pathway Restoration Protocol</h3>
+        <ul>
+          <li><strong>Dopamine System:</strong> Saffron Extract, L-Theanine, Myo-Inositol activate mood regulation through non-dopamine pathways while your receptors heal.</li>
+          <li><strong>GLP-1 Body Damage Control:</strong> Vitamin C, Ginger Extract, Magnesium stabilize the gut-brain axis disrupted by slowed gastric emptying.</li>
+          <li><strong>Receptor Rebuilding Complex:</strong> Magnesium, Zinc, Copper, Methylated B12 provide the cofactors needed to restore dopamine synthesis and receptor sensitivity.</li>
+        </ul>
+        <p>Clinical doses, based on the largest GLP-1 psychiatric study ever conducted.</p>
+      </section>
+
+      <section class="product" id="product">
+        <div class="product-box">
+          <p class="rating">Rated 4.92/5 based on 12,847+ Verified</p>
+          <h2>Zafira Recovery Foundation Capsules</h2>
+          <p>Carefully formulated to address the specific nutritional needs during GLP-1 treatment.</p>
+          <ul>
+            <li>Targets mental fog, hair loss and digestive issues.</li>
+            <li>Clinically tested ingredients at therapeutic doses.</li>
+            <li>Changes within days for mood.</li>
+            <li>Safe to use with all medications.</li>
+          </ul>
+          <a class="button" href="#">Add to Cart</a>
+          <p class="disclaimer">We recommend 5-6 months of consistent use for complete recovery.</p>
+          <p><strong>Counterfeit Warning:</strong> Zafira Recovery Foundation is only sold on this website. Any product listed on Amazon or eBay is counterfeit and not genuine Zafira Recovery Foundation.</p>
+        </div>
+      </section>
+
+      <section class="faq">
+        <h2>Product Questions</h2>
+        <h3>How To Use for Best Results?</h3>
+        <ul>
+          <li>Each bottle contains 60 capsules.</li>
+          <li>Take 2 capsules every day after a meal for best absorption.</li>
+          <li>One bottle = 30-day supply when used as directed.</li>
+          <li>Made in USA, third-party tested.</li>
+          <li>100% vegan, non-GMO, gluten-free.</li>
+        </ul>
+
+        <h3>How Does This Help With My Mood &amp; Energy Crashes?</h3>
+        <p><strong>For mood:</strong> Saffron helps your brain hold onto its "feel good" chemicals longer instead of burning through them too fast. L-Theanine calms the anxious, on-edge feeling without making you tired.</p>
+        <p><strong>For energy:</strong> B12 helps your body turn food into actual energy. Magnesium relaxes tight, tense muscles that quietly drain you all day.</p>
+
+        <h3>Will this stop my weight loss or bring back the "Food Noise"?</h3>
+        <p>Absolutely not. In fact, it often helps you lose weight faster. Zafira is designed to be a "Smart Shield." It restores the dopamine signals for mood and motivation, but it does not interfere with the GLP-1 mechanisms that silence your hunger.</p>
+
+        <h3>Will This Stop My Hair Loss?</h3>
+        <p>Very realistically yes. When you lose weight rapidly, your body loses the nutrients needed to retain and grow new hair.</p>
+
+        <h3>Does This Help With Nausea &amp; Those Sulfur Burps?</h3>
+        <p>Ginger extract is clinically proven for nausea relief and reduces gas formation. Most users report significant improvement within days.</p>
+
+        <h3>Is This Safe With GLP-1 Medications?</h3>
+        <p>Yes, all ingredients are food-based nutrients safe with medications. Many customers use it specifically for medication side effects. Always consult your doctor.</p>
+
+        <h3>How Long Until I See Difference?</h3>
+        <ul>
+          <li>Days 1-7: Digestive improvement, less nausea.</li>
+          <li>Week 2: Mood lifting, energy returning.</li>
+          <li>Week 4: Hair shedding slows.</li>
+          <li>Week 8: Feel like yourself again.</li>
+        </ul>
+
+        <h3>What If It Doesn&rsquo;t Work For Me?</h3>
+        <p>60-day money back guarantee. If you don&rsquo;t feel significantly better, full refund, no questions asked.</p>
+      </section>
+
+      <section>
+        <h2>Complete Ingredient List</h2>
+        <p><strong>Active Ingredients Per 2 Capsules:</strong></p>
+        <ul>
+          <li>Vitamin B12 - 50 mcg as Methylcobalamin - 2083% DV.</li>
+          <li>Vitamin C - 50 mg as Ascorbic Acid - 56% DV.</li>
+          <li>Vitamin D3 - 50 mcg / 2,000 IU as Cholecalciferol - 250% DV.</li>
+          <li>Magnesium - 50 mg Elemental from Magnesium Glycinate - 12% DV.</li>
+          <li>Zinc - 10 mg Elemental from Zinc Citrate - 91% DV.</li>
+          <li>Copper - 0.5 mg Elemental from Copper Glycinate - 56% DV.</li>
+          <li>Myo-Inositol - 600 mg.</li>
+          <li>L-Theanine - 200 mg.</li>
+          <li>Ginger Extract - 100 mg standardized to gingerols.</li>
+          <li>Saffron Extract - 30 mg, 4:1 extract.</li>
+        </ul>
+        <p>Other ingredients: hypromellose vegetable capsule, microcrystalline cellulose, silicon dioxide, magnesium stearate.</p>
+        <p>Allergen information: free from gluten, dairy, soy, and artificial colors or preservatives.</p>
+        <p class="disclaimer">These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease.</p>
+      </section>
+
+      <section>
+        <h2>Active Science-Backed Ingredients</h2>
+        <div class="ingredient-grid">
+          <div><h3>Saffron Extract (30mg)</h3><p>Restores emotional balance by supporting healthy dopamine activity in the brain.</p></div>
+          <div><h3>L-Theanine (200mg)</h3><p>Promotes calm, focused clarity without drowsiness or sedation.</p></div>
+          <div><h3>Myo-Inositol (600mg)</h3><p>Balances mood-regulating hormones and supports natural stress resilience.</p></div>
+          <div><h3>Magnesium Bisglycinate (50mg)</h3><p>Calms the nervous system and supports deep, restorative sleep.</p></div>
+          <div><h3>Ginger Extract (100mg)</h3><p>Reduces nausea, bloating, and digestive discomfort.</p></div>
+          <div><h3>Zinc &amp; Copper (10mg / 0.5mg)</h3><p>Supports hair health and neurotransmitter production in clinically-studied ratio.</p></div>
+          <div><h3>Vitamin D3 (2,000 IU)</h3><p>Supports stable mood and sustained daily energy.</p></div>
+          <div><h3>Vitamin B12 (50mcg Methylcobalamin)</h3><p>Boosts cellular energy and healthy nerve function.</p></div>
+        </div>
+      </section>
+
+      <section class="reviews">
+        <h2>Loved By Thousands Finding Their Way Back</h2>
+        <div class="review-grid">
+          <blockquote>
+            <p>After losing 30 lbs, I was ready to quit Ozempic. The mood crashes were unbearable. The Recovery Foundation brought my life back and I&rsquo;m down 50 lbs and actually so happy about it now.</p>
+            <cite>Rachel Morrison - Verified Customer</cite>
+          </blockquote>
+          <blockquote>
+            <p>The fatigue was destroying my life. Couldn&rsquo;t work past 2pm. Started Recovery Foundation and within a month had energy back. Bonus: my hair stopped falling out and I&rsquo;m regular again.</p>
+            <cite>Diana Ruth - Verified Customer</cite>
+          </blockquote>
+          <blockquote>
+            <p>This is literally the only supplement you&rsquo;ll need on GLP-1. Lost 31 lbs on Zepbound but felt dead inside. Mood stable, hair growing back, digestion normal.</p>
+            <cite>Kelsey Bondy - Verified Customer</cite>
+          </blockquote>
+        </div>
+      </section>
+
+      <section>
+        <h2>Our Scientific Background</h2>
+        <p><strong>The Problem:</strong> GLP-1 drugs make your brain remove dopamine too quickly from where it&rsquo;s needed, creating a 195% increased risk of major depression.</p>
+        <p><strong>Our Solution:</strong> We use clinically-proven saffron extract that bypasses your damaged dopamine system, plus therapeutic doses of the nutrients your brain needs to rebuild normal dopamine production and receptor sensitivity.</p>
+        <h3>Who We Are</h3>
+        <ul>
+          <li>Formulated specifically for GLP-1-induced anhedonia.</li>
+          <li>Based on 162,000+ patient psychiatric outcome data.</li>
+          <li>The only supplement addressing dopamine transporter dysfunction.</li>
+        </ul>
+        <p>At Zafira Organics, we believe you shouldn&rsquo;t have to trade your ability to feel joy for weight loss. Every ingredient is purposefully dosed to restore your brain&rsquo;s reward system &mdash; not just mask symptoms.</p>
+      </section>
+
+      <section class="reviews">
+        <h2>What Our Customers Are Saying</h2>
+        <div class="review-grid">
+          <blockquote><p>After 4 months on Wegovy, I felt like I was going through the motions of my life without actually being there. This is the first thing that&rsquo;s helped me feel present again.</p><cite>Rachel Morrison</cite></blockquote>
+          <blockquote><p>At 58, I thought the emptiness was just aging combined with Ozempic, but these nutrients specifically target what GLP-1s destroy in your brain.</p><cite>Leeya Walzar</cite></blockquote>
+          <blockquote><p>Finally something that actually works for the weird emptiness.</p><cite>Lindsay Schmitz - Verified Customer</cite></blockquote>
+          <blockquote><p>The worst part about Wegovy wasn&rsquo;t the nausea, it was feeling disconnected from my own life. This supplement helped me reconnect without giving up the weight loss.</p><cite>Barbara Williams</cite></blockquote>
+          <blockquote><p>I&rsquo;m 49 and the identity thing is real - you lose weight but also lose yourself somehow. This helped me feel stable through the changes instead of just numb.</p><cite>Nicole Hogan - Verified Customer</cite></blockquote>
+          <blockquote><p>37 lbs down but lost myself in the process. This gave me back my personality. My friends actually said "you&rsquo;re back!"</p><cite>Karen Hughes - Verified Customer</cite></blockquote>
+        </div>
+      </section>
+
+      <footer>
+        <h2>Zafira</h2>
+        <p>Join our email list for exclusive deals and early access to new products.</p>
+        <p>Customer Support: <a href="mailto:support@zafiraorganics.com">support@zafiraorganics.com</a></p>
+        <p>B2B Sales Inquiry: <a href="mailto:admin@zafiraorganics.com">admin@zafiraorganics.com</a></p>
+        <p>Monday - Friday, 9am - 5pm EST</p>
+        <p>1309 Coffeen Avenue STE 1200, Sheridan Wyoming, 82801. Fanstel Goods LLC.</p>
+        <p>&copy; 2026 Zafira</p>
+      </footer>
+    </div>
+  </body>
+</html>
