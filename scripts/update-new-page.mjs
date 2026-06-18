@@ -10,6 +10,7 @@ const stableScienceFallback = `
 <section class="sci-body">
   <div class="sci-container">
     <h2 class="sci-section-heading">The Numbers Behind the Problem</h2>
+    <div class="sci-image"><img src="/new/assets/science-image-2.png" alt="GLP-1 research statistics"></div>
     <p>As of late 2025, approximately <strong>15.5 million Americans</strong> are currently prescribed GLP-1 receptor agonist medications — semaglutide (Ozempic, Wegovy), tirzepatide (Mounjaro, Zepbound), and related compounds.</p>
     <p>Industry projections estimate this number will exceed 30 million by 2030 as access expands and new formulations enter the market.</p>
     <p>These medications represent one of the most significant pharmaceutical developments in metabolic health in decades. They work. The clinical data is undeniable.</p>
@@ -17,7 +18,6 @@ const stableScienceFallback = `
     <div class="sci-callout">
       <p>According to published research and real-world reporting:</p>
     </div>
-    <div class="sci-image"><img src="/new/assets/science-image-2.png" alt="GLP-1 research statistics"></div>
     <ul class="sci-list">
       <li>Up to <strong>44%</strong> of GLP-1 users report persistent nausea beyond the initial adjustment period</li>
       <li>Up to <strong>24%</strong> report significant constipation requiring intervention</li>
@@ -36,11 +36,11 @@ const stableScienceFallback = `
 <section class="sci-body">
   <div class="sci-container">
     <h2 class="sci-section-heading">Identifying the 6 Core Side Effects</h2>
+    <div class="sci-image"><img src="/new/assets/science-image-3.png" alt="Six side effect categories"></div>
     <p>We spent the first four months of our research phase doing something most supplement companies skip entirely: <strong>listening.</strong></p>
     <p>We conducted structured interviews with <strong>847 GLP-1 users.</strong></p>
     <p>We partnered with three weight loss clinics — in Chicago, Denver, and Sydney — to review anonymized patient feedback. We analyzed over 12,000 forum posts, filtering for recurring language patterns.</p>
     <p>What emerged was remarkably consistent. While individual experiences varied in severity, six distinct side effect categories appeared repeatedly:</p>
-    <div class="sci-image"><img src="/new/assets/science-image-3.png" alt="Six side effect categories"></div>
     <ul class="sci-list">
       <li><strong>Nausea</strong> — persistent, often daily, frequently worse in mornings</li>
       <li><strong>Reflux &amp; Sulfur Burps</strong> — described as "the worst part" by many users</li>
@@ -264,6 +264,7 @@ const customCss = `
     justify-content: center !important;
     overflow: visible !important;
     max-width: 720px !important;
+    position: relative !important;
   }
 
   .zafira-hero-image {
@@ -326,7 +327,7 @@ const customCss = `
     color: var(--z-body-text);
     font-family: var(--z-font-body);
     line-height: 1.7;
-    padding: 44px 0 28px;
+    padding: 30px 0 20px;
   }
 
   .zafira-science-insert .sci-container {
@@ -336,14 +337,20 @@ const customCss = `
   }
 
   .zafira-science-insert .sci-body {
-    padding: 36px 0;
+    padding: 24px 0;
+  }
+
+  .zafira-science-insert .sci-body::after {
+    clear: both;
+    content: "";
+    display: table;
   }
 
   .zafira-science-insert .sci-body p {
     color: var(--z-body-text);
     font-size: 1rem;
-    line-height: 1.8;
-    margin: 0 0 28px;
+    line-height: 1.68;
+    margin: 0 0 18px;
   }
 
   .zafira-science-insert .sci-body strong {
@@ -358,7 +365,7 @@ const customCss = `
     font-size: clamp(2.2rem, 8vw, 3.45rem);
     font-weight: 400;
     line-height: 1.06;
-    margin: 0 0 28px;
+    margin: 0 0 20px;
     padding: 0;
     position: relative;
   }
@@ -387,22 +394,23 @@ const customCss = `
     color: var(--z-green);
     font-size: 0.95rem;
     line-height: 1.75;
-    margin: 28px 0;
-    padding: 24px 28px;
+    margin: 18px 0 0;
+    padding: 22px 28px 12px;
   }
 
   .zafira-science-insert .sci-callout p {
     color: var(--z-green);
-    margin-bottom: 12px;
+    margin-bottom: 0;
   }
 
   .zafira-science-insert .sci-list,
   .zafira-science-insert .sci-numbered-list {
     background: var(--z-green-bg);
-    border-left: 3px solid var(--z-green);
-    border-radius: 0 12px 12px 0;
-    margin: 20px 0 24px;
-    padding: 18px 22px 18px 42px;
+    border-left: 4px solid var(--z-green);
+    border-radius: 0 0 12px 12px;
+    border-top: 1px solid rgba(3, 92, 5, 0.08);
+    margin: 0 0 18px;
+    padding: 12px 22px 18px 42px;
   }
 
   .zafira-science-insert .sci-list {
@@ -424,7 +432,7 @@ const customCss = `
   .zafira-science-insert .sci-image {
     background: var(--z-green-bg-strong);
     border-radius: var(--z-radius);
-    margin: 30px auto;
+    margin: 22px auto;
     overflow: hidden;
   }
 
@@ -438,7 +446,7 @@ const customCss = `
     background: #035C05;
     border-radius: var(--z-radius);
     color: #fff;
-    margin: 32px 0;
+    margin: 22px 0;
     padding: 28px;
     text-align: center;
   }
@@ -642,6 +650,34 @@ const customCss = `
     display: none !important;
   }
 
+  .zafira-offer-stage {
+    display: block !important;
+    margin: 24px auto 0 !important;
+    max-width: 1120px !important;
+    width: 100% !important;
+  }
+
+  .zafira-post-offer-info {
+    display: block !important;
+    margin: 18px auto 0 !important;
+    max-width: 920px !important;
+    width: 100% !important;
+  }
+
+  .zafira-post-offer-info [data-rid="bb485a75-c36d-4870-b1cb-1f133374d3d9"] {
+    margin: 22px auto 20px !important;
+    max-width: 760px !important;
+    text-align: center !important;
+  }
+
+  .zafira-post-offer-info [data-rid="bb485a75-c36d-4870-b1cb-1f133374d3d9"] p {
+    color: #035C05 !important;
+    font-size: 1.08rem !important;
+    font-weight: 800 !important;
+    line-height: 1.35 !important;
+    margin: 0 !important;
+  }
+
   .zafira-confetti-canvas {
     height: 100vh !important;
     inset: 0 !important;
@@ -721,6 +757,138 @@ const customCss = `
     margin: 0 !important;
   }
 
+  @media (min-width: 900px) {
+    [data-rid="688d5d8c-b3a3-4427-94b5-0236ea2a0fd7"] {
+      align-items: center !important;
+      display: grid !important;
+      gap: 46px !important;
+      grid-template-columns: minmax(430px, 0.82fr) minmax(560px, 1fr) !important;
+      margin: 0 auto !important;
+      max-width: 1640px !important;
+      min-height: 0 !important;
+      padding: 14px clamp(48px, 5vw, 88px) 12px !important;
+    }
+
+    [data-rid="02c8e31a-8f50-4b9c-ae9f-ef4cd2e96137"] {
+      align-items: flex-end !important;
+      justify-content: center !important;
+      max-width: 680px !important;
+      min-height: 0 !important;
+      padding-bottom: 20px !important;
+      padding-top: 0 !important;
+      transform: translateX(clamp(18px, 3vw, 58px)) !important;
+    }
+
+    [data-rid="4c006af1-6f51-415f-9f3c-ab275ac1ad21"] {
+      max-width: 660px !important;
+    }
+
+    [data-rid="4c006af1-6f51-415f-9f3c-ab275ac1ad21"] h2 {
+      font-size: clamp(2.45rem, 2.6vw, 3.45rem) !important;
+      line-height: 1.12 !important;
+      text-align: right !important;
+    }
+
+    .zafira-symptom-line,
+    .zafira-main-subhead {
+      max-width: 640px !important;
+      text-align: right !important;
+    }
+
+    [data-rid="6986de8f-6bad-4f35-844e-7713d6b54cd5"] {
+      align-self: center !important;
+      margin-top: 18px !important;
+      position: relative !important;
+      transform: none !important;
+      z-index: 2 !important;
+    }
+
+    .zafira-hero-media {
+      align-self: center !important;
+      height: calc(100% + 24px) !important;
+      margin-bottom: -12px !important;
+      margin-top: -12px !important;
+      max-width: none !important;
+      min-height: 0 !important;
+      overflow: hidden !important;
+      width: 100% !important;
+    }
+
+    .zafira-hero-image {
+      height: 100% !important;
+      object-fit: cover !important;
+      object-position: 56% center !important;
+      width: 100% !important;
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.18) 8%, #000 24%, #000 100%) !important;
+      mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.18) 8%, #000 24%, #000 100%) !important;
+    }
+
+    .zafira-science-insert {
+      padding: 44px 0 28px;
+    }
+
+    .zafira-science-insert .sci-container {
+      max-width: 1240px;
+      padding: 0 clamp(36px, 6vw, 80px);
+    }
+
+    .zafira-science-insert .sci-body {
+      padding: 30px 0;
+    }
+
+    .zafira-science-insert .sci-section-heading {
+      font-size: clamp(3.15rem, 4.2vw, 5.35rem);
+      max-width: 760px;
+    }
+
+    .zafira-science-insert .sci-image {
+      float: right;
+      margin: 4px 0 20px 38px;
+      max-width: 620px;
+      width: 50%;
+    }
+
+    .zafira-offer-stage {
+      grid-column: 1 / -1 !important;
+      order: 3 !important;
+    }
+
+    .zafira-offer-boxes {
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      max-width: 1120px !important;
+    }
+
+    .zafira-post-offer-info {
+      grid-column: 1 / -1 !important;
+      order: 4 !important;
+    }
+
+    #ordering [data-rid="3eb18ba8-918b-400d-9aa6-2122151f3cc6"] {
+      max-width: 720px !important;
+    }
+
+    #ordering [data-rid="3eb18ba8-918b-400d-9aa6-2122151f3cc6"],
+    #ordering [data-rid="3eb18ba8-918b-400d-9aa6-2122151f3cc6"] span {
+      font-size: clamp(3.05rem, 3.25vw, 4.35rem) !important;
+      line-height: 1.04 !important;
+    }
+
+    #ordering [data-rid="5ce1fec5-bcbf-4df1-8c92-6f01beac48ea"] p {
+      font-size: 1.16rem !important;
+      line-height: 1.35 !important;
+      max-width: 680px !important;
+    }
+
+    #ordering [data-rid="8dbe28a9-fe73-4a80-ad88-3d129789d047"] p {
+      font-size: 1.05rem !important;
+      line-height: 1.42 !important;
+    }
+
+    #ordering [data-rid="8dbe28a9-fe73-4a80-ad88-3d129789d047"] svg {
+      width: 20px !important;
+    }
+  }
+
   @media (max-width: 640px) {
     [data-rid="688d5d8c-b3a3-4427-94b5-0236ea2a0fd7"] {
       padding-left: 14px !important;
@@ -732,7 +900,7 @@ const customCss = `
       background: #d7f5d5 !important;
       display: block !important;
       height: 330px !important;
-      margin: -10px calc(50% - 50vw) 0 !important;
+      margin: 14px calc(50% - 50vw) 0 !important;
       max-width: none !important;
       min-height: 0 !important;
       overflow: hidden !important;
@@ -747,8 +915,8 @@ const customCss = `
       object-fit: cover !important;
       object-position: 66% center !important;
       width: 100% !important;
-      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.24) 9%, #000 26%, #000 100%) !important;
-      mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.24) 9%, #000 26%, #000 100%) !important;
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.06) 6%, rgba(0,0,0,0.26) 14%, rgba(0,0,0,0.62) 24%, #000 38%, #000 100%) !important;
+      mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.06) 6%, rgba(0,0,0,0.26) 14%, rgba(0,0,0,0.62) 24%, #000 38%, #000 100%) !important;
     }
 
     .zafira-symptom-line {
@@ -768,14 +936,78 @@ const customCss = `
       margin: 0 !important;
     }
 
+    [data-rid="6986de8f-6bad-4f35-844e-7713d6b54cd5"] {
+      margin-bottom: 8px !important;
+      position: relative !important;
+      z-index: 3 !important;
+    }
+
     .zafira-science-insert {
       padding-top: 36px;
+    }
+
+    #ordering {
+      height: auto !important;
+      margin-bottom: 0 !important;
+      min-height: 0 !important;
+      padding-bottom: 0 !important;
+    }
+
+    [data-rid="288dac43-67c5-49b0-a277-54e7828bd52f"] {
+      margin-bottom: 0 !important;
+      padding-bottom: 0 !important;
+    }
+
+    #ordering [data-rid="ffe36714-a8ac-4ebd-8ec4-2fee8864290e"],
+    #ordering [data-rid="fef050ff-7dfc-4f6e-b765-408dbfba1ba9"] {
+      display: none !important;
+      height: 0 !important;
+      margin: 0 !important;
+      min-height: 0 !important;
+      padding: 0 !important;
+    }
+
+    .zafira-post-offer-info [data-rid="bb485a75-c36d-4870-b1cb-1f133374d3d9"] {
+      margin: 8px auto 14px !important;
+      padding: 0 12px !important;
+    }
+
+    .zafira-post-offer-info [data-rid="bb485a75-c36d-4870-b1cb-1f133374d3d9"] p {
+      font-size: 1rem !important;
+      line-height: 1.38 !important;
+    }
+
+    .zafira-offer-stage {
+      margin-top: 0 !important;
+      max-width: 420px !important;
+      width: calc(100% - 32px) !important;
     }
 
     .zafira-offer-boxes {
       grid-template-columns: 1fr !important;
       gap: 14px !important;
-      margin-top: 20px !important;
+      margin-bottom: 4px !important;
+      margin-top: 0 !important;
+      max-width: 100% !important;
+    }
+
+    .zafira-post-offer-info {
+      margin-top: 0 !important;
+      max-width: 420px !important;
+      width: calc(100% - 32px) !important;
+    }
+
+    .zafira-post-offer-info [data-rid="bd87c70e-6347-4ca2-86cc-e9e2c4e7ba3e"] {
+      margin-bottom: 14px !important;
+    }
+
+    .zafira-post-offer-info [data-rid="11a4566c-b34f-4a3a-b7bf-5bc56b34d680"] {
+      margin-top: 14px !important;
+    }
+
+    .zafira-post-offer-info [data-rid="1"] {
+      padding-left: 14px !important;
+      padding-right: 14px !important;
     }
 
     .zafira-offer-content {
@@ -909,7 +1141,7 @@ const mountScript = `
       var dpr = window.devicePixelRatio || 1;
       var colors = ["#ff4d6d", "#ffd166", "#06d6a0", "#118ab2", "#9b5de5", "#f15bb5", "#035C05", "#F7B456"];
       var pieces = [];
-      var duration = 1550;
+      var duration = 3200;
       var start = performance.now();
 
       canvas.className = "zafira-confetti-canvas";
@@ -923,14 +1155,14 @@ const mountScript = `
 
       resize();
 
-      for (var i = 0; i < 150; i += 1) {
+      for (var i = 0; i < 210; i += 1) {
         pieces.push({
           x: Math.random() * window.innerWidth,
-          y: -40 - Math.random() * window.innerHeight * 0.65,
+          y: -60 - Math.random() * window.innerHeight * 1.15,
           w: 6 + Math.random() * 7,
           h: 8 + Math.random() * 12,
-          vx: -1.2 + Math.random() * 2.4,
-          vy: 3.2 + Math.random() * 4.4,
+          vx: -1.05 + Math.random() * 2.1,
+          vy: 2.4 + Math.random() * 3.2,
           rotation: Math.random() * Math.PI,
           spin: -0.18 + Math.random() * 0.36,
           color: colors[i % colors.length],
@@ -945,8 +1177,8 @@ const mountScript = `
           piece.x += piece.vx;
           piece.y += piece.vy;
           piece.rotation += piece.spin;
-          piece.vy += 0.025;
-          var fade = elapsed > duration - 420 ? Math.max(0, (duration - elapsed) / 420) : 1;
+          piece.vy += 0.018;
+          var fade = elapsed > duration - 1300 ? Math.max(0, (duration - elapsed) / 1300) : 1;
           ctx.save();
           ctx.globalAlpha = piece.opacity * fade;
           ctx.translate(piece.x, piece.y);
@@ -993,12 +1225,36 @@ const mountScript = `
       });
 
       if (!document.getElementById("zafira-offer-boxes")) {
+        var productTop = ordering.closest('[data-rid="288dac43-67c5-49b0-a277-54e7828bd52f"]') || ordering.parentElement;
+        var stage = document.createElement("div");
+        stage.className = "zafira-offer-stage";
         var fragment = template.content.cloneNode(true);
-        if (oldButton && oldButton.parentNode) {
-          oldButton.parentNode.insertBefore(fragment, oldButton);
+        stage.appendChild(fragment);
+        if (productTop && productTop.parentNode) {
+          productTop.parentNode.insertBefore(stage, productTop.nextSibling);
         } else {
-          ordering.appendChild(fragment);
+          ordering.appendChild(stage);
         }
+      }
+
+      var postOfferInfo = document.querySelector(".zafira-post-offer-info");
+      if (!postOfferInfo) {
+        postOfferInfo = document.createElement("div");
+        postOfferInfo.className = "zafira-post-offer-info";
+        var stageRoot = document.querySelector(".zafira-offer-stage") || document.getElementById("zafira-offer-boxes");
+        if (stageRoot && stageRoot.parentNode) {
+          stageRoot.parentNode.insertBefore(postOfferInfo, stageRoot.nextSibling);
+        }
+      }
+
+      if (postOfferInfo && oldButton && postOfferInfo.dataset.zafiraInfoMoved !== "true") {
+        var next = oldButton.nextElementSibling;
+        while (next) {
+          var current = next;
+          next = next.nextElementSibling;
+          postOfferInfo.appendChild(current);
+        }
+        postOfferInfo.dataset.zafiraInfoMoved = "true";
       }
 
       var offerRoot = document.getElementById("zafira-offer-boxes");
@@ -1022,7 +1278,7 @@ const mountScript = `
           rainConfetti();
           setTimeout(function () {
             openOfferModal(button.getAttribute("data-offer-label") || "Offer");
-          }, 900);
+          }, 1500);
         });
       });
 
