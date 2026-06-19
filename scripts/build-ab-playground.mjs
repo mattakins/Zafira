@@ -108,8 +108,13 @@ function refreshSnapshots() {
       });
     }
 
+    function isComparisonFrame() {
+      return !!window.frameElement;
+    }
+
     window.addEventListener("wheel", function (event) {
       if (event.ctrlKey) return;
+      if (!isComparisonFrame()) return;
       event.preventDefault();
       scrollParent(event.deltaY, event.deltaX);
     }, { passive: false });
@@ -124,6 +129,7 @@ function refreshSnapshots() {
 
     window.addEventListener("touchmove", function (event) {
       if (!event.touches || !event.touches.length || lastTouchY === null) return;
+      if (!isComparisonFrame()) return;
       var touch = event.touches[0];
       var deltaY = lastTouchY - touch.clientY;
       var deltaX = lastTouchX - touch.clientX;

@@ -408,19 +408,29 @@ const customCss = `
   }
 
   [data-rid="54e29b1a-e82b-42cf-b791-d0b983f35dc7"] > picture[data-rid="f8a7c6ee-348a-47f2-b07a-02c7da97d94d"] {
+    aspect-ratio: 1 / 1 !important;
     display: block !important;
+    height: auto !important;
     margin: 0 auto 18px !important;
     max-width: 720px !important;
+    overflow: visible !important;
     transform: none !important;
     width: 100% !important;
     left: auto !important;
     position: relative !important;
   }
 
+  [data-rid="54e29b1a-e82b-42cf-b791-d0b983f35dc7"] > picture[data-rid="f8a7c6ee-348a-47f2-b07a-02c7da97d94d"].zafira-foundation-image-pending {
+    visibility: hidden !important;
+  }
+
   [data-rid="54e29b1a-e82b-42cf-b791-d0b983f35dc7"] > picture[data-rid="f8a7c6ee-348a-47f2-b07a-02c7da97d94d"] img {
+    aspect-ratio: 1 / 1 !important;
     border-radius: 0 !important;
     display: block !important;
     height: auto !important;
+    max-height: none !important;
+    min-height: 0 !important;
     object-fit: contain !important;
     width: 100% !important;
   }
@@ -1175,6 +1185,7 @@ const mountScript = `
     function mountFoundationImage() {
       var picture = document.querySelector('[data-rid="f8a7c6ee-348a-47f2-b07a-02c7da97d94d"]');
       if (!picture) return;
+      picture.classList.add("zafira-foundation-image-pending");
       var heading = document.querySelector('[data-rid="47ebffd3-0cae-44ea-9d5d-f1721503cbb7"]');
       if (heading && heading.parentNode && picture.previousElementSibling !== heading) {
         heading.insertAdjacentElement("afterend", picture);
@@ -1188,6 +1199,7 @@ const mountScript = `
         img.setAttribute("src", asset);
         img.setAttribute("alt", "Woman holding Zafira Recovery Foundation with ingredient benefits");
       }
+      picture.classList.remove("zafira-foundation-image-pending");
     }
 
     function rainConfetti() {
