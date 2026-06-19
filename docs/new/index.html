@@ -2659,6 +2659,7 @@ first.parentNode.insertBefore(script, first);
     width: min(112vw, 720px) !important;
     left: 50% !important;
     position: relative !important;
+    visibility: hidden;
   }
 
   [data-rid="54e29b1a-e82b-42cf-b791-d0b983f35dc7"] > picture[data-rid="f8a7c6ee-348a-47f2-b07a-02c7da97d94d"] img {
@@ -4808,6 +4809,7 @@ rgb(var(--color-border-rgb) / 1.0); --border-radius:
         img.setAttribute("src", asset);
         img.setAttribute("alt", "Woman holding Zafira Recovery Foundation with ingredient benefits");
       }
+      picture.style.visibility = 'visible';
     }
 
     function rainConfetti() {
@@ -5014,6 +5016,7 @@ rgb(var(--color-border-rgb) / 1.0); --border-radius:
 
     window.addEventListener("wheel", function (event) {
       if (event.ctrlKey) return;
+      if (window.parent === window) return;
       event.preventDefault();
       scrollParent(event.deltaY, event.deltaX);
     }, { passive: false });
@@ -5028,6 +5031,7 @@ rgb(var(--color-border-rgb) / 1.0); --border-radius:
 
     window.addEventListener("touchmove", function (event) {
       if (!event.touches || !event.touches.length || lastTouchY === null) return;
+      if (window.parent === window) return;
       var touch = event.touches[0];
       var deltaY = lastTouchY - touch.clientY;
       var deltaX = lastTouchX - touch.clientX;
