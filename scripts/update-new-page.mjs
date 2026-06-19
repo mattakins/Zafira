@@ -1269,8 +1269,8 @@ const mountScript = `
       }
 
       var offerRoot = document.getElementById("zafira-offer-boxes");
-      if (!offerRoot || offerRoot.dataset.zafiraOfferMounted === "true") return;
-      offerRoot.dataset.zafiraOfferMounted = "true";
+      if (!offerRoot || offerRoot.dataset.zafiraOfferBound === "true") return;
+      offerRoot.dataset.zafiraOfferBound = "true";
 
       offerRoot.querySelectorAll(".zafira-offer-card").forEach(function (card) {
         card.addEventListener("click", function (event) {

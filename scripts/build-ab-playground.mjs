@@ -6,7 +6,7 @@ const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const docsDir = join(root, "docs");
 const docsOriginal = join(docsDir, "original");
 const docsNew = join(docsDir, "new");
-const frameVersion = "20260619-align-fix-1";
+const frameVersion = "20260619-interactive-1";
 
 const sections = [
   {
@@ -101,6 +101,101 @@ function refreshSnapshots() {
   cpSync(join(root, "public", "new", "index.html"), join(docsNew, "index.html"));
   cpSync(join(root, "public", "new", "assets"), join(docsNew, "assets"), { recursive: true });
 
+  const frameInteractionScript = `
+<script id="zafira-ab-frame-interactions">
+  (function () {
+    function post(type, payload) {
+      if (!window.parent || window.parent === window) return;
+      window.parent.postMessage(Object.assign({ type: type }, payload || {}), "*");
+    }
+
+    function scrollParent(deltaY, deltaX) {
+      post("zafira-ab-frame-scroll", {
+        deltaX: deltaX || 0,
+        deltaY: deltaY || 0
+      });
+    }
+
+    window.addEventListener("wheel", function (event) {
+      if (event.ctrlKey) return;
+      event.preventDefault();
+      scrollParent(event.deltaY, event.deltaX);
+    }, { passive: false });
+
+    var lastTouchY = null;
+    var lastTouchX = null;
+    window.addEventListener("touchstart", function (event) {
+      if (!event.touches || !event.touches.length) return;
+      lastTouchY = event.touches[0].clientY;
+      lastTouchX = event.touches[0].clientX;
+    }, { passive: true });
+
+    window.addEventListener("touchmove", function (event) {
+      if (!event.touches || !event.touches.length || lastTouchY === null) return;
+      var touch = event.touches[0];
+      var deltaY = lastTouchY - touch.clientY;
+      var deltaX = lastTouchX - touch.clientX;
+      lastTouchY = touch.clientY;
+      lastTouchX = touch.clientX;
+      event.preventDefault();
+      scrollParent(deltaY, deltaX);
+    }, { passive: false });
+
+    window.addEventListener("touchend", function () {
+      lastTouchY = null;
+      lastTouchX = null;
+    }, { passive: true });
+
+    function targetForHash(hash) {
+      if (!hash || hash === "#") return null;
+      try {
+        return document.querySelector(hash);
+      } catch {
+        return document.getElementById(hash.slice(1));
+      }
+    }
+
+    function productTarget() {
+      return document.getElementById("ordering") ||
+        document.querySelector('[data-rid="288dac43-67c5-49b0-a277-54e7828bd52f"]') ||
+        document.querySelector("[data-replo-product-container]");
+    }
+
+    function sendScrollTo(target) {
+      if (!target) return false;
+      post("zafira-ab-frame-scroll-to", {
+        y: target.getBoundingClientRect().top
+      });
+      return true;
+    }
+
+    document.addEventListener("click", function (event) {
+      var link = event.target.closest && event.target.closest("a[href]");
+      if (link) {
+        var href = link.getAttribute("href") || "";
+        var hash = "";
+        try {
+          hash = new URL(href, window.location.href).hash;
+        } catch {}
+        var hashTarget = targetForHash(hash);
+        if (hashTarget) {
+          event.preventDefault();
+          sendScrollTo(hashTarget);
+          return;
+        }
+      }
+
+      var action = event.target.closest && event.target.closest("button, [role='link'], a");
+      if (!action) return;
+      var text = (action.textContent || "").replace(/\\s+/g, " ").trim();
+      if (/^(shop now|buy now|order now|shop recovery foundation)$/i.test(text)) {
+        event.preventDefault();
+        sendScrollTo(productTarget());
+      }
+    }, true);
+  })();
+</script>`;
+
   const newIndexPath = join(docsNew, "index.html");
   const newIndex = readFileSync(newIndexPath, "utf8")
     .replaceAll('href="/"', 'href="../new/index.html"')
@@ -109,7 +204,8 @@ function refreshSnapshots() {
     .replaceAll('srcSet="/new/assets/', 'srcSet="assets/')
     .replaceAll('srcset="/new/assets/', 'srcset="assets/')
     .replaceAll('"/new/assets/', '"assets/')
-    .replaceAll("'/new/assets/", "'assets/");
+    .replaceAll("'/new/assets/", "'assets/")
+    .replace("</body>", `${frameInteractionScript}</body>`);
   writeFileSync(newIndexPath, newIndex);
 
   const originalIndexPath = join(docsOriginal, "index.html");
@@ -118,8 +214,8 @@ function refreshSnapshots() {
   .zafira-ab-missing-section {
     align-items: center;
     background:
-      repeating-linear-gradient(-45deg, rgba(3,92,5,0.035), rgba(3,92,5,0.035) 12px, transparent 12px, transparent 24px),
-      #f4f6f4;
+      repeating-linear-gradient(-45deg, rgba(3,92,5,0.075), rgba(3,92,5,0.075) 14px, rgba(255,255,255,0.22) 14px, rgba(255,255,255,0.22) 28px),
+      #eff8ef;
     border-bottom: 1px dashed rgba(3, 92, 5, 0.2);
     border-top: 1px dashed rgba(3, 92, 5, 0.2);
     color: rgba(3, 92, 5, 0.42);
@@ -255,7 +351,7 @@ function refreshSnapshots() {
       '<div data-rid="bb485a75-c36d-4870-b1cb-1f133374d3d9"',
       `<section class="zafira-ab-missing-section" data-zafira-gap="offer-cards"><div></div></section><div data-rid="bb485a75-c36d-4870-b1cb-1f133374d3d9"`,
     )
-    .replace("</body>", `${originalPlaceholderStyles}${originalPlaceholderScript}</body>`);
+    .replace("</body>", `${originalPlaceholderStyles}${originalPlaceholderScript}${frameInteractionScript}</body>`);
   writeFileSync(originalIndexPath, originalIndex);
 }
 
@@ -407,7 +503,6 @@ function pageHtml() {
       border: 0;
       display: block;
       min-height: 100vh;
-      pointer-events: none;
       width: 100%;
     }
 
@@ -734,6 +829,31 @@ function pageHtml() {
         updateActiveCommentary();
       });
     }
+
+    window.addEventListener("message", (event) => {
+      if (!event.data || typeof event.data.type !== "string") return;
+      const sourceFrame =
+        event.source === oldFrame.contentWindow ? oldFrame :
+        event.source === newFrame.contentWindow ? newFrame :
+        null;
+      if (!sourceFrame) return;
+
+      if (event.data.type === "zafira-ab-frame-scroll") {
+        window.scrollBy({
+          left: Number(event.data.deltaX) || 0,
+          top: Number(event.data.deltaY) || 0,
+          behavior: "auto",
+        });
+        requestLayoutUpdate();
+      }
+
+      if (event.data.type === "zafira-ab-frame-scroll-to") {
+        const frameTop = window.scrollY + sourceFrame.getBoundingClientRect().top;
+        const targetY = frameTop + (Number(event.data.y) || 0) - 12;
+        window.scrollTo({ top: Math.max(0, targetY), behavior: "smooth" });
+        window.setTimeout(requestLayoutUpdate, 260);
+      }
+    });
 
     window.addEventListener("scroll", requestLayoutUpdate, { passive: true });
     window.addEventListener("resize", requestLayoutUpdate);

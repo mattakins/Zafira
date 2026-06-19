@@ -4914,8 +4914,8 @@ rgb(var(--color-border-rgb) / 1.0); --border-radius:
       }
 
       var offerRoot = document.getElementById("zafira-offer-boxes");
-      if (!offerRoot || offerRoot.dataset.zafiraOfferMounted === "true") return;
-      offerRoot.dataset.zafiraOfferMounted = "true";
+      if (!offerRoot || offerRoot.dataset.zafiraOfferBound === "true") return;
+      offerRoot.dataset.zafiraOfferBound = "true";
 
       offerRoot.querySelectorAll(".zafira-offer-card").forEach(function (card) {
         card.addEventListener("click", function (event) {
@@ -4971,5 +4971,98 @@ rgb(var(--color-border-rgb) / 1.0); --border-radius:
     setTimeout(mountOfferBoxes, 100);
   })();
 </script>
-</body>
+
+<script id="zafira-ab-frame-interactions">
+  (function () {
+    function post(type, payload) {
+      if (!window.parent || window.parent === window) return;
+      window.parent.postMessage(Object.assign({ type: type }, payload || {}), "*");
+    }
+
+    function scrollParent(deltaY, deltaX) {
+      post("zafira-ab-frame-scroll", {
+        deltaX: deltaX || 0,
+        deltaY: deltaY || 0
+      });
+    }
+
+    window.addEventListener("wheel", function (event) {
+      if (event.ctrlKey) return;
+      event.preventDefault();
+      scrollParent(event.deltaY, event.deltaX);
+    }, { passive: false });
+
+    var lastTouchY = null;
+    var lastTouchX = null;
+    window.addEventListener("touchstart", function (event) {
+      if (!event.touches || !event.touches.length) return;
+      lastTouchY = event.touches[0].clientY;
+      lastTouchX = event.touches[0].clientX;
+    }, { passive: true });
+
+    window.addEventListener("touchmove", function (event) {
+      if (!event.touches || !event.touches.length || lastTouchY === null) return;
+      var touch = event.touches[0];
+      var deltaY = lastTouchY - touch.clientY;
+      var deltaX = lastTouchX - touch.clientX;
+      lastTouchY = touch.clientY;
+      lastTouchX = touch.clientX;
+      event.preventDefault();
+      scrollParent(deltaY, deltaX);
+    }, { passive: false });
+
+    window.addEventListener("touchend", function () {
+      lastTouchY = null;
+      lastTouchX = null;
+    }, { passive: true });
+
+    function targetForHash(hash) {
+      if (!hash || hash === "#") return null;
+      try {
+        return document.querySelector(hash);
+      } catch {
+        return document.getElementById(hash.slice(1));
+      }
+    }
+
+    function productTarget() {
+      return document.getElementById("ordering") ||
+        document.querySelector('[data-rid="288dac43-67c5-49b0-a277-54e7828bd52f"]') ||
+        document.querySelector("[data-replo-product-container]");
+    }
+
+    function sendScrollTo(target) {
+      if (!target) return false;
+      post("zafira-ab-frame-scroll-to", {
+        y: target.getBoundingClientRect().top
+      });
+      return true;
+    }
+
+    document.addEventListener("click", function (event) {
+      var link = event.target.closest && event.target.closest("a[href]");
+      if (link) {
+        var href = link.getAttribute("href") || "";
+        var hash = "";
+        try {
+          hash = new URL(href, window.location.href).hash;
+        } catch {}
+        var hashTarget = targetForHash(hash);
+        if (hashTarget) {
+          event.preventDefault();
+          sendScrollTo(hashTarget);
+          return;
+        }
+      }
+
+      var action = event.target.closest && event.target.closest("button, [role='link'], a");
+      if (!action) return;
+      var text = (action.textContent || "").replace(/\s+/g, " ").trim();
+      if (/^(shop now|buy now|order now|shop recovery foundation)$/i.test(text)) {
+        event.preventDefault();
+        sendScrollTo(productTarget());
+      }
+    }, true);
+  })();
+</script></body>
 </html>

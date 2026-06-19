@@ -144,7 +144,6 @@
       border: 0;
       display: block;
       min-height: 100vh;
-      pointer-events: none;
       width: 100%;
     }
 
@@ -265,7 +264,7 @@
         <div class="column-label"><strong>Old Version</strong><span>iPhone Pro width</span></div>
         <div class="phone">
           <div class="screen">
-            <iframe id="oldFrame" src="original/index.html?v=20260619-align-fix-1" title="Old Zafira page" scrolling="no"></iframe>
+            <iframe id="oldFrame" src="original/index.html?v=20260619-interactive-1" title="Old Zafira page" scrolling="no"></iframe>
           </div>
         </div>
       </section>
@@ -274,7 +273,7 @@
         <div class="column-label"><strong>New Version</strong><span>iPhone Pro width</span></div>
         <div class="phone">
           <div class="screen">
-            <iframe id="newFrame" src="new/index.html?v=20260619-align-fix-1" title="New Zafira page" scrolling="no"></iframe>
+            <iframe id="newFrame" src="new/index.html?v=20260619-interactive-1" title="New Zafira page" scrolling="no"></iframe>
           </div>
         </div>
       </section>
@@ -552,6 +551,31 @@
         updateActiveCommentary();
       });
     }
+
+    window.addEventListener("message", (event) => {
+      if (!event.data || typeof event.data.type !== "string") return;
+      const sourceFrame =
+        event.source === oldFrame.contentWindow ? oldFrame :
+        event.source === newFrame.contentWindow ? newFrame :
+        null;
+      if (!sourceFrame) return;
+
+      if (event.data.type === "zafira-ab-frame-scroll") {
+        window.scrollBy({
+          left: Number(event.data.deltaX) || 0,
+          top: Number(event.data.deltaY) || 0,
+          behavior: "auto",
+        });
+        requestLayoutUpdate();
+      }
+
+      if (event.data.type === "zafira-ab-frame-scroll-to") {
+        const frameTop = window.scrollY + sourceFrame.getBoundingClientRect().top;
+        const targetY = frameTop + (Number(event.data.y) || 0) - 12;
+        window.scrollTo({ top: Math.max(0, targetY), behavior: "smooth" });
+        window.setTimeout(requestLayoutUpdate, 260);
+      }
+    });
 
     window.addEventListener("scroll", requestLayoutUpdate, { passive: true });
     window.addEventListener("resize", requestLayoutUpdate);
