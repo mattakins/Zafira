@@ -179,13 +179,13 @@ scienceBlock = scienceBlock
   .replaceAll('style="padding-top: 0;"', "");
 
 const scienceInsert = `
-<section class="zafira-science-insert" id="glp1-flu-science">
+<section class="zafira-science-insert" data-zafira-science-root>
 ${scienceBlock}
 </section>
 `;
 
 const offerInsert = `
-<div class="zafira-offer-boxes" id="zafira-offer-boxes" aria-label="Recovery Foundation subscription offers">
+<div class="zafira-offer-boxes" data-zafira-offer-root aria-label="Recovery Foundation subscription offers">
   <article class="zafira-offer-card zafira-offer-card--featured" data-offer="three-month">
     <div class="zafira-offer-ribbon">Best Value</div>
     <div class="zafira-offer-content">
@@ -1097,11 +1097,17 @@ const mountScript = `
     }
 
     function mountScience() {
-      if (document.getElementById("glp1-flu-science")) return;
+      if (document.querySelector('[data-zafira-science-mounted="true"]')) return;
       var target = document.querySelector('[data-rid="c4c11ad8-6395-4470-aaf5-15c3a2e91e2b"]');
       var template = document.getElementById("zafira-science-template");
       if (!target || !template || !target.parentNode) return;
-      target.parentNode.insertBefore(template.content.cloneNode(true), target);
+      var fragment = template.content.cloneNode(true);
+      var root = fragment.querySelector("[data-zafira-science-root]");
+      if (root) {
+        root.id = "glp1-flu-science";
+        root.dataset.zafiraScienceMounted = "true";
+      }
+      target.parentNode.insertBefore(fragment, target);
     }
 
     function mountShopAnchor() {
@@ -1224,11 +1230,16 @@ const mountScript = `
         el.classList.add("zafira-old-cart-hidden");
       });
 
-      if (!document.getElementById("zafira-offer-boxes")) {
+      if (!document.querySelector('[data-zafira-offer-mounted="true"]')) {
         var productTop = ordering.closest('[data-rid="288dac43-67c5-49b0-a277-54e7828bd52f"]') || ordering.parentElement;
         var stage = document.createElement("div");
         stage.className = "zafira-offer-stage";
         var fragment = template.content.cloneNode(true);
+        var offerRootInFragment = fragment.querySelector("[data-zafira-offer-root]");
+        if (offerRootInFragment) {
+          offerRootInFragment.id = "zafira-offer-boxes";
+          offerRootInFragment.dataset.zafiraOfferMounted = "true";
+        }
         stage.appendChild(fragment);
         if (productTop && productTop.parentNode) {
           productTop.parentNode.insertBefore(stage, productTop.nextSibling);
@@ -1241,7 +1252,7 @@ const mountScript = `
       if (!postOfferInfo) {
         postOfferInfo = document.createElement("div");
         postOfferInfo.className = "zafira-post-offer-info";
-        var stageRoot = document.querySelector(".zafira-offer-stage") || document.getElementById("zafira-offer-boxes");
+        var stageRoot = document.querySelector(".zafira-offer-stage") || document.querySelector('[data-zafira-offer-mounted="true"]');
         if (stageRoot && stageRoot.parentNode) {
           stageRoot.parentNode.insertBefore(postOfferInfo, stageRoot.nextSibling);
         }
