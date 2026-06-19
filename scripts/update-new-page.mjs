@@ -407,24 +407,34 @@ const customCss = `
     padding-top: 54px !important;
   }
 
-  [data-rid="54e29b1a-e82b-42cf-b791-d0b983f35dc7"] > picture[data-rid="f8a7c6ee-348a-47f2-b07a-02c7da97d94d"] {
+  .zafira-foundation-image-wrap {
     aspect-ratio: 1 / 1 !important;
     display: block !important;
-    height: auto !important;
+    height: min(720px, 100vw) !important;
     margin: 0 auto 18px !important;
     max-width: 720px !important;
     overflow: visible !important;
-    transform: none !important;
     width: 100% !important;
-    left: auto !important;
     position: relative !important;
   }
 
-  [data-rid="54e29b1a-e82b-42cf-b791-d0b983f35dc7"] > picture[data-rid="f8a7c6ee-348a-47f2-b07a-02c7da97d94d"].zafira-foundation-image-pending {
+  .zafira-foundation-image-wrap > picture[data-rid="f8a7c6ee-348a-47f2-b07a-02c7da97d94d"] {
+    display: block !important;
+    height: 100% !important;
+    left: auto !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+    overflow: visible !important;
+    position: relative !important;
+    transform: none !important;
+    width: 100% !important;
+  }
+
+  .zafira-foundation-image-wrap > picture[data-rid="f8a7c6ee-348a-47f2-b07a-02c7da97d94d"].zafira-foundation-image-pending {
     visibility: hidden !important;
   }
 
-  [data-rid="54e29b1a-e82b-42cf-b791-d0b983f35dc7"] > picture[data-rid="f8a7c6ee-348a-47f2-b07a-02c7da97d94d"] img {
+  .zafira-foundation-image-wrap > picture[data-rid="f8a7c6ee-348a-47f2-b07a-02c7da97d94d"] img {
     aspect-ratio: 1 / 1 !important;
     border-radius: 0 !important;
     display: block !important;
@@ -436,11 +446,10 @@ const customCss = `
   }
 
   @media (max-width: 640px) {
-    [data-rid="54e29b1a-e82b-42cf-b791-d0b983f35dc7"] > picture[data-rid="f8a7c6ee-348a-47f2-b07a-02c7da97d94d"] {
-      left: 50% !important;
-      max-width: none !important;
-      transform: translateX(-50%) !important;
-      width: min(112vw, 720px) !important;
+    .zafira-foundation-image-wrap {
+      height: min(720px, 100vw) !important;
+      max-width: 100% !important;
+      width: 100% !important;
     }
   }
 
@@ -1187,8 +1196,16 @@ const mountScript = `
       if (!picture) return;
       picture.classList.add("zafira-foundation-image-pending");
       var heading = document.querySelector('[data-rid="47ebffd3-0cae-44ea-9d5d-f1721503cbb7"]');
-      if (heading && heading.parentNode && picture.previousElementSibling !== heading) {
-        heading.insertAdjacentElement("afterend", picture);
+      var wrapper = document.querySelector(".zafira-foundation-image-wrap");
+      if (!wrapper) {
+        wrapper = document.createElement("div");
+        wrapper.className = "zafira-foundation-image-wrap";
+      }
+      if (heading && heading.parentNode && wrapper.previousElementSibling !== heading) {
+        heading.insertAdjacentElement("afterend", wrapper);
+      }
+      if (picture.parentElement !== wrapper) {
+        wrapper.appendChild(picture);
       }
       var asset = "/new/assets/recovery-foundation-benefits-woman.png";
       picture.querySelectorAll("source").forEach(function (source) {
@@ -1198,6 +1215,19 @@ const mountScript = `
       if (img) {
         img.setAttribute("src", asset);
         img.setAttribute("alt", "Woman holding Zafira Recovery Foundation with ingredient benefits");
+      }
+      var width = wrapper.getBoundingClientRect().width;
+      if (width > 0) {
+        wrapper.style.setProperty("height", Math.round(width) + "px", "important");
+      }
+      if (wrapper.dataset.zafiraResizeBound !== "true") {
+        wrapper.dataset.zafiraResizeBound = "true";
+        window.addEventListener("resize", function () {
+          var nextWidth = wrapper.getBoundingClientRect().width;
+          if (nextWidth > 0) {
+            wrapper.style.setProperty("height", Math.round(nextWidth) + "px", "important");
+          }
+        });
       }
       picture.classList.remove("zafira-foundation-image-pending");
     }
