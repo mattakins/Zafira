@@ -3905,6 +3905,16 @@ rgb(var(--color-border-rgb) / 1.0); --border-radius:
     }
 
     document.addEventListener("click", function (event) {
+      var offerButton = event.target.closest && event.target.closest(".zafira-offer-button");
+      if (offerButton) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        post("zafira-ab-offer-selected", {
+          label: offerButton.getAttribute("data-offer-label") || "Offer"
+        });
+        return;
+      }
+
       var link = event.target.closest && event.target.closest("a[href]");
       if (link) {
         var href = link.getAttribute("href") || "";

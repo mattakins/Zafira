@@ -138,10 +138,10 @@ const heroPicture = `<picture data-rid="1b363c0e-64ee-40e3-aecd-9acc21542448" cl
 </picture>`;
 html = html.slice(0, heroPictureStart) + heroPicture + html.slice(heroPictureEnd);
 
-const foundationPictureStart = html.indexOf(
+let foundationPictureStart = html.indexOf(
   '<picture data-rid="f8a7c6ee-348a-47f2-b07a-02c7da97d94d"',
 );
-const foundationPictureEnd =
+let foundationPictureEnd =
   html.indexOf("</picture>", foundationPictureStart) + "</picture>".length;
 if (foundationPictureStart === -1 || foundationPictureEnd === -1) {
   throw new Error("Foundation picture not found");
@@ -157,6 +157,26 @@ html =
   html.slice(0, foundationPictureStart) +
   foundationPicture +
   html.slice(foundationPictureEnd);
+
+foundationPictureStart = html.indexOf(
+  '<picture data-rid="f8a7c6ee-348a-47f2-b07a-02c7da97d94d"',
+);
+foundationPictureEnd =
+  html.indexOf("</picture>", foundationPictureStart) + "</picture>".length;
+html = html.slice(0, foundationPictureStart) + html.slice(foundationPictureEnd);
+
+const foundationHeadingStart = html.indexOf(
+  '<div data-rid="47ebffd3-0cae-44ea-9d5d-f1721503cbb7"',
+);
+const foundationHeadingEnd =
+  html.indexOf("</div>", foundationHeadingStart) + "</div>".length;
+if (foundationHeadingStart === -1 || foundationHeadingEnd === -1) {
+  throw new Error("Recovery Foundation heading not found");
+}
+html =
+  html.slice(0, foundationHeadingEnd) +
+  foundationPicture +
+  html.slice(foundationHeadingEnd);
 
 const numbersStart = science.indexOf("<!-- THE NUMBERS -->");
 const afterNoSolutionMarker = science.indexOf("<!-- INTERSTITIAL", numbersStart);
@@ -385,6 +405,24 @@ const customCss = `
     margin-top: 0 !important;
     padding-bottom: 54px !important;
     padding-top: 54px !important;
+  }
+
+  [data-rid="54e29b1a-e82b-42cf-b791-d0b983f35dc7"] > picture[data-rid="f8a7c6ee-348a-47f2-b07a-02c7da97d94d"] {
+    display: block !important;
+    margin: 0 auto 18px !important;
+    max-width: none !important;
+    transform: translateX(-50%) !important;
+    width: min(112vw, 720px) !important;
+    left: 50% !important;
+    position: relative !important;
+  }
+
+  [data-rid="54e29b1a-e82b-42cf-b791-d0b983f35dc7"] > picture[data-rid="f8a7c6ee-348a-47f2-b07a-02c7da97d94d"] img {
+    border-radius: 0 !important;
+    display: block !important;
+    height: auto !important;
+    object-fit: contain !important;
+    width: 100% !important;
   }
 
   .zafira-science-insert .sci-callout {
@@ -1128,6 +1166,10 @@ const mountScript = `
     function mountFoundationImage() {
       var picture = document.querySelector('[data-rid="f8a7c6ee-348a-47f2-b07a-02c7da97d94d"]');
       if (!picture) return;
+      var heading = document.querySelector('[data-rid="47ebffd3-0cae-44ea-9d5d-f1721503cbb7"]');
+      if (heading && heading.parentNode && picture.previousElementSibling !== heading) {
+        heading.insertAdjacentElement("afterend", picture);
+      }
       var asset = "/new/assets/recovery-foundation-benefits-woman.png";
       picture.querySelectorAll("source").forEach(function (source) {
         source.setAttribute("srcset", asset);
