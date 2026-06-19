@@ -410,10 +410,10 @@ const customCss = `
   [data-rid="54e29b1a-e82b-42cf-b791-d0b983f35dc7"] > picture[data-rid="f8a7c6ee-348a-47f2-b07a-02c7da97d94d"] {
     display: block !important;
     margin: 0 auto 18px !important;
-    max-width: none !important;
-    transform: translateX(-50%) !important;
-    width: min(112vw, 720px) !important;
-    left: 50% !important;
+    max-width: 720px !important;
+    transform: none !important;
+    width: 100% !important;
+    left: auto !important;
     position: relative !important;
   }
 
@@ -423,6 +423,15 @@ const customCss = `
     height: auto !important;
     object-fit: contain !important;
     width: 100% !important;
+  }
+
+  @media (max-width: 640px) {
+    [data-rid="54e29b1a-e82b-42cf-b791-d0b983f35dc7"] > picture[data-rid="f8a7c6ee-348a-47f2-b07a-02c7da97d94d"] {
+      left: 50% !important;
+      max-width: none !important;
+      transform: translateX(-50%) !important;
+      width: min(112vw, 720px) !important;
+    }
   }
 
   .zafira-science-insert .sci-callout {
